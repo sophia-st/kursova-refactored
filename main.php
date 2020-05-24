@@ -16,7 +16,7 @@ try {
 
 function getALLPosts(){
     global $dbh;
-global $config;
+    global $config;
     // Запит на отримання фотографіі портфоліо
     $qry = "SELECT * FROM ". $config['dbname'] .".table_content";
     $stmt = $dbh->prepare($qry);
@@ -43,8 +43,10 @@ function createUser(){
         return '';
     }
     $pass = md5($pass);
+
+    $date = date('Y-m-d H:i:s');
     // Запит на створення нового користувача
-    $qry = "INSERT INTO ". $config['dbname'] .".users (`name`, email, email_verified_at, password, remember_token, created_at, updated_at) VALUES('{$name}', '{$email}', NULL, '{$pass}', NULL, '', '');";
+    $qry = "INSERT INTO ". $config['dbname'] .".users (`name`, email, email_verified_at, password, remember_token, created_at, updated_at) VALUES('{$name}', '{$email}', NULL, '{$pass}', NULL, '{$date}', '{$date}');";
     $stmt = $dbh->query($qry);
     $stmt->execute();
     $result = $stmt->fetchAll();
@@ -91,8 +93,14 @@ function createTicket(){
         header("Location: login.php");
     }
 
+    //шукаемо юзера з вказаним id
+    $qry1 = "SELECT * FROM `". $config['dbname'] ."`.`users` WHERE `name` LIKE 'admin'";
+    $stmt = $dbh->query($qry1);
+    $stmt->execute();
+    $data1 = $stmt->fetch(PDO::FETCH_ASSOC);
+    $idUser = $data1['id'];
     //додавання тікета на бронювання
-    $qry = "INSERT INTO `". $config['dbname'] ."`.`ticket` (`name`, `email`, `created_at`, `updated_at`) VALUES ('{$name}', '{$email}', NULL, NULL);";
+    $qry = "INSERT INTO `". $config['dbname'] ."`.`ticket` (`name`, `email`, `created_at`, `updated_at`, `user_id`) VALUES ('{$name}', '{$email}', NULL, NULL, {$idUser});";
     $stmt = $dbh->query($qry);
     $stmt->execute();
     header("Location: index.php?res=true");
@@ -108,14 +116,28 @@ function createContent(){
         header("Location: index.php");
     }
 
+
+    //якшо юзер не авторизований то перенаправляємо на головну сторінку
+    if(!isset($_SESSION['id'])){
+        header("Location: index.php");
+    }
+
+
+    //шукаемо юзера з вказаним id
+    $qry1 = "SELECT * FROM `". $config['dbname'] ."`.`users` WHERE `id`=".$_SESSION['id'];
+    $stmt = $dbh->query($qry1);
+    $stmt->execute();
+    $data1 = $stmt->fetch(PDO::FETCH_ASSOC);
+    $idUser = $data1['id'];
+
     //додавання фотографіі до портфоліо
-    $qry = "INSERT INTO `". $config['dbname'] ."`.`table_content` (`title`, `decs`, `photourl`) VALUES ( '{$title}', '{$decs}', '{$photourl}');";
+    $qry = "INSERT INTO `". $config['dbname'] ."`.`table_content` (`title`, `decs`, `photourl`, `created_by`, `user_id`) VALUES ( '{$title}', '{$decs}', '{$photourl}', {$idUser});";
     $stmt = $dbh->query($qry);
     $stmt->execute();
 }
 
 function logout(){
-    //session_start();
+    session_start();
     unset($_SESSION['id']);
     unset($_SESSION['name']);
     header("Location: index.php");
