@@ -1,4 +1,7 @@
 <?php
+//ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']."/session") ));
+
+error_reporting(E_ERROR | E_PARSE);
 require "config.php";
 
 $dbh = '';
@@ -14,7 +17,7 @@ try {
 function getALLPosts(){
     global $dbh;
     // Запит на отримання фотографіі портфоліо
-    $qry = "SELECT * FROM kurs.table_content";
+    $qry = "SELECT * FROM id13822818_kurs.table_content";
     $stmt = $dbh->prepare($qry);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -30,7 +33,7 @@ function createUser(){
     }
 
     //запит на пошук користувача з іменем  '%name%'
-    $qry = "SELECT * FROM kurs.table_content where 'name' = ':name '";
+    $qry = "SELECT * FROM id13822818_kurs.users where 'name' = ':name '";
     $stmt = $dbh->prepare($qry);
     $stmt->execute(array(':name' => $name));
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -40,7 +43,7 @@ function createUser(){
     }
     $pass = md5($pass);
     // Запит на створення нового користувача
-    $qry = "INSERT INTO kurs.users (`name`, email, email_verified_at, password, remember_token, created_at, updated_at) VALUES('{$name}', '{$email}', NULL, '{$pass}', NULL, '', '');";
+    $qry = "INSERT INTO id13822818_kurs.users (`name`, email, email_verified_at, password, remember_token, created_at, updated_at) VALUES('{$name}', '{$email}', NULL, '{$pass}', NULL, '', '');";
     $stmt = $dbh->query($qry);
     $stmt->execute();
     $result = $stmt->fetchAll();
@@ -65,11 +68,13 @@ function doLogin(){
 
     $pass = md5($pass);
     //запит на пошук користувача з іменем  '%name%'
-    $qry = "SELECT * FROM `kurs`.`users` WHERE `email` LIKE '{$email}' AND `password` LIKE '{$pass}'";
+    $qry = "SELECT * FROM `id13822818_kurs`.`users` WHERE `email` LIKE '{$email}' AND `password` LIKE '{$pass}'";
     $stmt = $dbh->query($qry);
     $stmt->execute();
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
     if(!empty($data)) {
+        ob_start();
+        session_start();
         $_SESSION['id'] = $data['id'];
         $_SESSION['name'] = $data['name'];
     }
@@ -86,10 +91,10 @@ function createTicket(){
     }
 
     //додавання тікета на бронювання
-    $qry = "INSERT INTO `ticket` (`name`, `email`, `created_at`, `updated_at`) VALUES ('{$name}', '{$email}', NULL, NULL);";
+    $qry = "INSERT INTO `id13822818_kurs`.`ticket` (`name`, `email`, `created_at`, `updated_at`) VALUES ('{$name}', '{$email}', NULL, NULL);";
     $stmt = $dbh->query($qry);
     $stmt->execute();
-    header("Location: index.php");
+    header("Location: index.php?res=true");
 
 }
 
@@ -103,13 +108,13 @@ function createContent(){
     }
 
     //додавання фотографіі до портфоліо
-    $qry = "INSERT INTO `table_content` (`title`, `decs`, `photourl`) VALUES ( '{$title}', '{$decs}', '{$photourl}');";
+    $qry = "INSERT INTO `id13822818_kurs`.`table_content` (`title`, `decs`, `photourl`) VALUES ( '{$title}', '{$decs}', '{$photourl}');";
     $stmt = $dbh->query($qry);
     $stmt->execute();
 }
 
 function logout(){
-    session_start();
+    //session_start();
     unset($_SESSION['id']);
     unset($_SESSION['name']);
     header("Location: index.php");

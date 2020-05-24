@@ -152,8 +152,11 @@ $user = getUserInfo();
                         <input type="text" name="name">
                         <input type="submit" value="Send">
                         <form>
-                    <?php }?>
+                    <?php } ?>
             </div>
+        <?php if ( isset($_GET['res'] )) { ?>
+                        <h3 id='msg' style='color:green'>Thank you! Reservation was created! </h3>
+                    <?php } ?>
         </section>
 
         <div class="album py-5 bg-light">
@@ -274,6 +277,344 @@ $user = getUserInfo();
                 </div>
             </div>
         </div>
+        <style>
+        .contacts {
+            display: block;
+            position: relative;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            text-align: center;
+        }
+        .banner-img{
+	display: block;
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+
+.left-content-bg{
+	background-color: #f0f0f0;
+}
+
+.banner-img img{
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.banner{
+	display: block;
+	position: relative;
+	background: #f0f0f0;
+}
+
+h2.banner-title{
+	text-transform: uppercase;
+	font-size: 36px;
+	margin-top: 50px;
+}
+
+.banner-excerpt{
+	display: block;
+	position: relative;
+	line-height: 52px;
+	font-size: 18px;
+	font-weight: 100;
+}
+
+.banner-permalink{
+	display: block;
+	position: relative;
+	padding-top: 40px;
+	padding-bottom: 60px;
+}
+
+.banner-permalink a{
+	display: inline-block;
+	border: 2px solid #000;
+	color: #000;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 10px 30px;
+	transition: .2s;
+}
+
+.banner-permalink a:hover{
+	border: 2px solid #e10707;
+	color: #e10707;
+}
+
+.underbanner-text .banner-excerpt{
+	line-height: 32px;
+}
+
+.underbanner-text{
+	display: block;
+	position: relative;
+	text-align: center;
+	background: rgba(255,255,255,0.9);
+	margin-bottom: 60px;
+	padding: 0px 15px;
+}
+
+.underbanner-text h2{
+	font-size: 30px;
+	padding-top: 30px;
+}
+
+.contacts{
+	display: block;
+	position: relative;
+	padding-top: 60px;
+	padding-bottom: 60px;
+	text-align: center;
+}
+
+.contacts h4.widget-title{
+	text-transform: uppercase;
+	font-size: 36px;
+	font-weight: 400;
+	margin-bottom: 30px;
+}
+
+.contacts .textwidget{
+	font-size: 18px;
+	font-weight: 100;
+	line-height: 32px;
+}
+
+.footer{
+	display: block;
+	position: relative;
+	background: #f0f0f0;
+	padding: 30px 0px;
+}
+
+h4.footer-title{
+	text-transform: uppercase;
+}
+
+.copyright span{
+	font-weight: 100;
+}
+
+.footer-info h4.footer-title{
+	text-align: right;
+}
+
+.footer-info .textwidget{
+	text-align: right;
+}
+
+.mobmenu-btn{
+	display: block;
+	position: relative;
+	text-align: center;
+}
+
+img.menubtn-img{
+	width: 42px;
+	height: 42px;
+}
+
+.mobmenu-btn button{
+	border: none;
+	background: #fff;
+	padding: 10px;
+}
+
+.mobmenu-btn button[aria-expanded="true"]{
+	border: 1px solid #000;
+}
+
+@media (max-width: 992px){
+	.copyright{
+		text-align: center;
+	}
+	.footer-info{
+		margin-top: 30px;
+		text-align: center;
+	}
+	.footer-info h4.footer-title,
+	.footer-info .textwidget{
+		text-align: center;
+	}
+}
+
+.menucontent{
+	background: #f0f0f0;
+}
+
+.menucontent ul{
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+
+.menucontent ul li{
+	display: block;
+}
+
+.menucontent ul li a{
+	display: block;
+	color: #000;
+	font-weight: 500;
+	padding: 10px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.menucontent ul li a:hover{
+	background: #000;
+	color: #f0f0f0;
+}
+
+.page-inner{
+	display: block;
+	position: relative;
+	min-height: 500px;
+	padding-bottom: 60px;
+}
+
+.page-inner-header{
+	padding-bottom: 30px;
+	box-shadow: 0px 0px 30px rgba(0,0,0,0.2);
+}
+
+.breadcrumbs{
+	display: block;
+	position: relative;
+	margin-top: 40px;
+}
+
+.breadcrumbs ul{
+	list-style-type: none;
+	display: block;
+	margin: 0px;
+	padding: 0px;
+}
+
+.breadcrumbs ul li{
+	display: inline-block;
+	margin-right: 5px;
+	font-weight: 600;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+
+.breadcrumbs ul li a{
+	text-decoration: none;
+	color: #e10707;
+}
+
+.breadcrumbs ul li a:hover{
+	text-decoration: underline;
+	color: #000;
+}
+
+.page-inner-title{
+	display: block;
+	position: relative;
+	padding-top: 10px;
+}
+
+.single-post-thumb{
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+.single-post-thumb img{
+	width: 100%;
+	height: auto;
+}
+
+.single-post-content,
+.page-inner-content{
+	display: block;
+	position: relative;
+	font-size: 18px;
+	font-weight: 300;
+	line-height: 28px;
+}
+
+.single-post-content ul{
+	margin-left: 30px;
+	margin-top: 20px;
+}
+
+iframe{
+	width: 100%;
+}
+
+.wpcf7-text{
+	width: 100%;
+	margin-bottom: 10px;
+	font-weight: 300;
+	font-size: 14px;
+	padding: 10px;
+	border: 1px solid rgba(0,0,0,0.2);
+}
+
+.wpcf7-textarea{
+	width: 100%;
+	height: 200px;
+	resize: none;
+	margin-bottom: 10px;
+	font-weight: 300;
+	font-size: 14px;
+	padding: 10px;
+	border: 1px solid rgba(0,0,0,0.2);
+}
+
+.wpcf7-submit{
+	width: 100%;
+	height: auto;
+	border: 1px solid #000;
+	padding: 10px;
+	text-transform: uppercase;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.wpcf7-submit:hover{
+	color: #e10707;
+	border: 1px solid #e10707;
+}
+
+
+        </style>
+        <section class="banner" style="background: url('http://foto25.kiev.ua/wp-content/uploads/2018/06/banner.jpg') no-repeat right center; background-size: cover;">
+		
+			<div class="container hidden-md hidden-lg">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="underbanner-text">
+							<h2 class="banner-title">Чому ми?</h2>
+							<div class="banner-excerpt" style="padding: 15px;">
+								<p>Завдяки новітній професійній фототехніці у нас ви зможете замовити будь-які види фотопослуг, отримавши кваліфіковану консультацію і результат, зробити термінове фото на документи, що отримаєте вже за 5-10 хвилин. Ми приймаємо як друк цифрових фотографій, так і фотографій з фотоплівок, оцифровуємо відео з записом на DVD-диск, роздруковуємо тексти, робимо ксерокопії.</p>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+        <section class="contacts">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="mainpage-contacts">
+							<h2 class="widget-title">Контакти</h2><div class="textwidget"><p style="text-align: center;">Адреса: 01001, Украина, м. Львів, вул. Личаківська, 25 А</p>
+<p style="text-align: center;">E-mail: sophiast1506@gmail.com</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  sophiast1506@gmail.com</p>
+<p style="text-align: center;"><br>
+Телефон: (044)279-47-96</p></div>						</div>
+					</div>
+				</div>
+			</div>
+		</section>
     </main>
     <footer class="text-muted">
         <div class="container">
@@ -285,4 +626,11 @@ $user = getUserInfo();
         </div>
     </footer>
     </body>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {document.getElementById('msg').style.display = 'none';}, 2000);
+
+  });
+
+    </script>
 </html>
