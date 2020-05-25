@@ -163,7 +163,7 @@ $user = getUserInfo();
             <div class="container">
 
                 <div class="row">
-                    <?php foreach ($posts as $post) {?>
+                    <?php foreach ($posts as $post) { if (!is_null($post['photourl'])) {?>
                     <div class="col-md-4">
                         <div class="card mb-4 box-shadow">
                             <img class="card-img-top" data-src="<?php echo($post['photourl'])?>" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="<?php echo($post["photourl"])?>" data-holder-rendered="true">
@@ -179,7 +179,7 @@ $user = getUserInfo();
                             </div>
                         </div>
                     </div>
-                <?php } ?>
+                <?php } }?>
                 </div>
             </div>
         </div>
