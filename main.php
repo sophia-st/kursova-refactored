@@ -48,7 +48,6 @@ function createUser(){
     // Запит на створення нового користувача
     $qry = "INSERT INTO ". $config['dbname'] .".users (`name`, email, email_verified_at, password, remember_token, created_at, updated_at) VALUES('{$name}', '{$email}', NULL, '{$pass}', NULL, '{$date}', '{$date}');";
     $stmt = $dbh->query($qry);
-    $stmt->execute();
     $result = $stmt->fetchAll();
     header("Location: index.php");
 }
@@ -99,10 +98,11 @@ function createTicket(){
     $stmt->execute();
     $data1 = $stmt->fetch(PDO::FETCH_ASSOC);
     $idUser = $data1['id'];
+    $date = date('Y-m-d H:i:s');
+
     //додавання тікета на бронювання
-    $qry = "INSERT INTO `". $config['dbname'] ."`.`ticket` (`name`, `email`, `created_at`, `updated_at`, `user_id`) VALUES ('{$name}', '{$email}', NULL, NULL, {$idUser});";
+    $qry = "INSERT INTO `". $config['dbname'] ."`.`ticket` (`name`, `email`, `created_at`, `updated_at`, `user_id`) VALUES ('{$name}', '{$email}', '{$date}', '{$date}', {$idUser});";
     $stmt = $dbh->query($qry);
-    $stmt->execute();
     header("Location: index.php?res=true");
 
 }
@@ -116,7 +116,7 @@ function createContent(){
         header("Location: index.php");
     }
 
-
+    session_start();
     //якшо юзер не авторизований то перенаправляємо на головну сторінку
     if(!isset($_SESSION['id'])){
         header("Location: index.php");
@@ -131,9 +131,10 @@ function createContent(){
     $idUser = $data1['id'];
 
     //додавання фотографіі до портфоліо
-    $qry = "INSERT INTO `". $config['dbname'] ."`.`table_content` (`title`, `decs`, `photourl`, `created_by`, `user_id`) VALUES ( '{$title}', '{$decs}', '{$photourl}', {$idUser});";
+    $qry = "INSERT INTO `". $config['dbname'] ."`.`table_content` (`title`, `decs`, `photourl`, `created_by`) VALUES ( '{$title}', '{$decs}', '{$photourl}', {$idUser});";
     $stmt = $dbh->query($qry);
-    $stmt->execute();
+
+    header("Location: index.php");
 }
 
 function logout(){

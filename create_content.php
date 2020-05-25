@@ -1,8 +1,6 @@
 <?php
 require 'main.php';
 
-if(!empty($_POST)){
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
     createContent();
 }
-
-header("Location: index.php");

@@ -1,6 +1,6 @@
 <?php
 $config = [
-    'dbname' => 'kurs',
+    'dbname' => 'kurs1',
     'dbpass' => '',
     'dbhost' => 'localhost',
     'dbusername' => 'root',
