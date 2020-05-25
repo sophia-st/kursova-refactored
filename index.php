@@ -12,7 +12,10 @@ $user = getUserInfo();
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-
+        <script src="https://code.jquery.com/jquery-3.5.1.js"
+                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+                crossorigin="anonymous">
+        </script>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">        <!-- Styles -->
@@ -629,8 +632,14 @@ iframe{
     <script>
     document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {document.getElementById('msg').style.display = 'none';}, 2000);
-
   });
+    $("[name='name']").change(function() {
+        $("#name").val($("[name='name']").val());
+    });
+
+    $("[name='email']").change(function() {
+        $("#email").val($("[name='email']").val());
+    });
 
     </script>
 </html>
