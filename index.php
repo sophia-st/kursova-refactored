@@ -12,7 +12,10 @@ $user = getUserInfo();
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-
+        <script src="https://code.jquery.com/jquery-3.5.1.js"
+                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+                crossorigin="anonymous">
+        </script>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">        <!-- Styles -->
@@ -243,17 +246,17 @@ $user = getUserInfo();
 
                                 <!-- Name input-->
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="name">Name</label>
+                                    <label class="col-md-3 control-label" for="name1">Name</label>
                                     <div class="col-md-9">
-                                        <input id="name" name="name" type="text" placeholder="Your name" class="form-control">
+                                        <input id="name1" name="name1" type="text" placeholder="Your name" class="form-control">
                                     </div>
                                 </div>
 
                                 <!-- Email input-->
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="email">Your E-mail</label>
+                                    <label class="col-md-3 control-label" for="email1">Your E-mail</label>
                                     <div class="col-md-9">
-                                        <input id="email" name="email" type="text" placeholder="Your email" class="form-control">
+                                        <input id="email1" name="email1" type="text" placeholder="Your email" class="form-control">
                                     </div>
                                 </div>
 
@@ -268,7 +271,7 @@ $user = getUserInfo();
                                 <!-- Form actions -->
                                 <div class="form-group">
                                     <div class="col-md-12 text-right">
-                                        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                                        <button type="submit" id="sendLetter" class="btn btn-primary btn-lg">Submit</button>
                                     </div>
                                 </div>
                             </fieldset>
@@ -621,16 +624,24 @@ iframe{
             <p class="float-right">
                 <a href="#">Back to top</a>
             </p>
-            <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-            <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
         </div>
     </footer>
     </body>
     <script>
     document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {document.getElementById('msg').style.display = 'none';}, 2000);
-
   });
+    $("[name='name']").change(function() {
+        $("#name1").val($("[name='name']").val());
+    });
 
+    $("[name='email']").change(function() {
+        $("#email1").val($("[name='email']").val());
+    });
+
+    $("#sendLetter").click(function() {
+        $("[name='email']").val($("#email1").val());
+        $("[name='name']").val($("#name1").val());
+    });
     </script>
 </html>
